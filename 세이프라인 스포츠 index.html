@@ -18,7 +18,7 @@
             <div class="bg-red-600 p-2 rounded-lg text-white">
                 <i class="fa-solid fa-heart-pulse text-lg"></i>
             </div>
-           <div>
+            <div>
                 <h1 class="font-bold text-lg leading-tight">응급 가이드</h1>
                 <p class="text-xs text-slate-400">플랩 / 동호회 현장 응급처치</p>
             </div>
@@ -44,16 +44,16 @@
             <button onclick="switchView('back')" id="btn-back" class="flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 transition-all">신체 뒷면</button>
         </div>
 
-        <!-- 인체 더미 인터페이스 영역 -->
+        <!-- 인체 더미 인터페이스 영역 (앞면) -->
         <div id="dummy-front" class="grid grid-cols-1 gap-3">
-            <button onclick="selectBodyPart('머리/안面', ['뇌진탕 (어지러움/두통)', '안면 출혈 및 찰과상', '치아 파손'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+            <button onclick="selectBodyPart('머리/얼굴', ['뇌진탕 (어지러움/두통)', '안면 출혈 및 찰과상', '치아 파손'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
                 <div class="flex items-center space-x-3">
                     <i class="fa-solid fa-head-side-mask text-red-500 text-xl w-6 text-center"></i>
                     <span class="font-bold">머리 / 얼굴</span>
                 </div>
                 <i class="fa-solid fa-chevron-right text-slate-600"></i>
             </button>
-            <button onclick="selectBodyPart('상체 (어깨/가슴)', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '가슴 타박상 (호흡 곤란)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+            <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '가슴 타박상 (호흡 곤란)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
                 <div class="flex items-center space-x-3">
                     <i class="fa-solid fa-user-shield text-red-500 text-xl w-6 text-center"></i>
                     <span class="font-bold">어깨 / 가슴 / 팔</span>
@@ -76,8 +76,9 @@
             </button>
         </div>
 
+        <!-- 인체 더미 인터페이스 영역 (뒷면) -->
         <div id="dummy-back" class="grid grid-cols-1 gap-3 hidden">
-            <button onclick="selectBodyPart('목/어깨 뒷부분', ['목디스크 충격 (저림/통증)', '목 근육 경련 (담걸림)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+            <button onclick="selectBodyPart('목/어깨 후면', ['목디스크 충격 (저림/통증)', '목 근육 경련 (담걸림)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
                 <div class="flex items-center space-x-3">
                     <i class="fa-solid fa-user text-red-500 text-xl w-6 text-center"></i>
                     <span class="font-bold">목 / 어깨 후면</span>
@@ -91,7 +92,7 @@
                 </div>
                 <i class="fa-solid fa-chevron-right text-slate-600"></i>
             </button>
-            <button onclick="selectBodyPart('종아리/햄스트링', ['햄스트링 파열 (뒤쪽 허벅지 찌릿)', '종아리 근육 파열 (알 배김/파열)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+            <button onclick="selectBodyPart('햄스트링/종아리', ['햄스트링 파열 (뒤쪽 허벅지 찌릿)', '종아리 근육 파열 (알 배김/파열)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
                 <div class="flex items-center space-x-3">
                     <i class="fa-solid fa-bolt text-red-500 text-xl w-6 text-center"></i>
                     <span class="font-bold">햄스트링 / 종아리 (후면)</span>
@@ -109,7 +110,7 @@
 
     <!-- 증상 선택 모달 -->
     <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto animate-in fade-in slide-in-from-bottom duration-200">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4">
                 <h3 id="modal-title" class="text-lg font-bold text-white">부상 증상 선택</h3>
                 <button onclick="closeModal()" class="text-slate-400 hover:text-white p-2">
@@ -206,7 +207,7 @@
                         <p class="text-xs text-slate-300">얼음주머니를 수건에 감싸 부상 부위에 15~20분간 대어 부종과 통증을 줄입니다.</p>
                     </div>
                     <div class="bg-slate-800/60 p-3 rounded-xl">
-                        <span class="text-red-400 font-bold block mb-1">3. 압박 & 거올 (Compression & Elevation)</span>
+                        <span class="text-red-400 font-bold block mb-1">3. 압박 & 거상 (Compression & Elevation)</span>
                         <p class="text-xs text-slate-300">탄력 붕대로 가볍게 압박하고, 부상 부위를 심장보다 높게 유지합니다.</p>
                     </div>
                 </div>
