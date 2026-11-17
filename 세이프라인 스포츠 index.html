@@ -40,82 +40,79 @@
         </div>
 
         <!-- 앞/뒤 전환 탭 -->
-        <div class="flex bg-slate-900 p-1 rounded-xl mb-5 border border-slate-800 w-full max-w-xs shadow-inner">
+        <div class="flex bg-slate-900 p-1 rounded-xl mb-4 border border-slate-800 w-full max-w-xs shadow-inner">
             <button onclick="switchView('front')" id="btn-front" class="flex-1 py-2 text-xs font-bold rounded-lg bg-red-600 text-white transition-all shadow-md">앞면 (Front)</button>
             <button onclick="switchView('back')" id="btn-back" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 transition-all">뒷면 (Back)</button>
         </div>
 
-        <!-- 인체 더미 컨테이너 (사람 형상 배치) -->
-        <div class="relative bg-slate-900/90 border border-slate-800 rounded-3xl p-5 w-full max-w-xs flex flex-col items-center justify-center shadow-2xl space-y-2.5">
+        <!-- 인체 더미 컨테이너 (사람 실루엣 형상 배치) -->
+        <div class="relative bg-slate-900/90 border border-slate-800 rounded-3xl p-5 w-full max-w-xs flex flex-col items-center justify-center shadow-2xl space-y-2">
             
             <!-- 앞면 -->
-            <div id="dummy-front" class="w-full flex flex-col items-center space-y-2.5">
-                <div class="text-[10px] tracking-widest text-slate-500 font-semibold mb-1">— HUMAN BODY (FRONT) —</div>
+            <div id="dummy-front" class="w-full flex flex-col items-center space-y-2">
                 
-                <button onclick="selectBodyPart('머리/얼굴', ['뇌진탕 (어지러움/두통)', '안면 출혈 및 찰과상', '치아 파손'])" class="w-20 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-full text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
-                    <i class="fa-solid fa-head-side-mask text-red-400 group-hover:text-white text-xs mb-0.5"></i>
-                    <span>머리/얼굴</span>
+                <button onclick="selectBodyPart('머리/얼굴', ['뇌진탕 (어지러움/두통)', '안면 출혈 및 찰과상', '치아 파손'])" class="w-16 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-full text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-head-side-mask text-red-400 text-xs"></i>
+                    <span class="text-[10px]">머리/얼굴</span>
                 </button>
                 
-                <div class="w-8 h-3 bg-slate-800/80 rounded-sm border border-slate-700"></div>
+                <div class="w-6 h-3 bg-slate-800/80 rounded border border-slate-700"></div>
 
-                <div class="flex items-center space-x-1 w-full justify-center">
-                    <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '상완 부상'])" class="w-14 h-24 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-[11px] font-bold transition-all shadow flex flex-col items-center justify-center">
-                        <span class="text-[10px] text-slate-400">왼팔</span>
+                <div class="flex items-center space-x-1.5 w-full justify-center">
+                    <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '상완 부상'])" class="w-12 h-28 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-[10px] font-bold transition-all shadow flex flex-col items-center justify-center">
+                        <span>왼팔</span>
                     </button>
-                    <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '가슴 타박상 (호흡 곤란)'])" class="w-32 h-24 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-2xl text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                    <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '가슴 타박상 (호흡 곤란)'])" class="w-32 h-28 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-2xl text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
                         <i class="fa-solid fa-user-shield text-red-400 text-sm mb-1"></i>
                         <span>어깨 / 가슴</span>
                     </button>
-                    <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '상완 부상'])" class="w-14 h-24 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-[11px] font-bold transition-all shadow flex flex-col items-center justify-center">
-                        <span class="text-[10px] text-slate-400">오른팔</span>
+                    <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '상완 부상'])" class="w-12 h-28 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-[10px] font-bold transition-all shadow flex flex-col items-center justify-center">
+                        <span>오른팔</span>
                     </button>
                 </div>
 
-                <button onclick="selectBodyPart('복부/갈비뼈', ['갈비뼈 골절 의심', '복부 타박상'])" class="w-36 h-12 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center space-x-1">
-                    <i class="fa-solid fa-child text-red-400 text-xs"></i>
+                <button onclick="selectBodyPart('복부/갈비뼈', ['갈비뼈 골절 의심', '복부 타박상'])" class="w-32 h-10 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center">
                     <span>복부 / 갈비뼈</span>
                 </button>
                 
-                <div class="flex space-x-6 w-full justify-center pt-1">
-                    <button onclick="selectBodyPart('무릎', ['무릎 인대 파손 (십자인대/측부)', '반월상 연골 손상', '단순 타박상 및 부종'])" class="w-20 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center">
+                <div class="flex space-x-4 w-full justify-center">
+                    <button onclick="selectBodyPart('무릎', ['무릎 인대 파손 (십자인대/측부)', '반월상 연골 손상', '단순 타박상 및 부종'])" class="w-14 h-20 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-[11px] font-bold transition-all shadow flex items-center justify-center">
                         좌측무릎
                     </button>
-                    <button onclick="selectBodyPart('무릎', ['무릎 인대 파손 (십자인대/측부)', '반월상 연골 손상', '단순 타박상 및 부종'])" class="w-20 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center">
+                    <button onclick="selectBodyPart('무릎', ['무릎 인대 파손 (십자인대/측부)', '반월상 연골 손상', '단순 타박상 및 부종'])" class="w-14 h-20 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-[11px] font-bold transition-all shadow flex items-center justify-center">
                         우측무릎
                     </button>
                 </div>
 
-                <div class="flex space-x-6 w-full justify-center pb-1">
-                    <button onclick="selectBodyPart('발목/발', ['발목 염좌 (삐끗함)', '아킬레스건 파손 의심', '발가락 골절'])" class="w-20 h-11 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-lg text-xs font-bold transition-all shadow flex items-center justify-center">
+                <div class="flex space-x-4 w-full justify-center">
+                    <button onclick="selectBodyPart('발목/발', ['발목 염좌 (삐끗함)', '아킬레스건 파손 의심', '발가락 골절'])" class="w-14 h-10 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-lg text-[10px] font-bold transition-all shadow flex items-center justify-center">
                         왼발목
                     </button>
-                    <button onclick="selectBodyPart('발목/발', ['발목 염좌 (삐끗함)', '아킬레스건 파손 의심', '발가락 골절'])" class="w-20 h-11 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-lg text-xs font-bold transition-all shadow flex items-center justify-center">
+                    <button onclick="selectBodyPart('발목/발', ['발목 염좌 (삐끗함)', '아킬레스건 파손 의심', '발가락 골절'])" class="w-14 h-10 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-lg text-[10px] font-bold transition-all shadow flex items-center justify-center">
                         오른발목
                     </button>
                 </div>
             </div>
 
             <!-- 뒷면 -->
-            <div id="dummy-back" class="w-full flex flex-col items-center space-y-3 hidden">
-                <div class="text-[10px] tracking-widest text-slate-500 font-semibold mb-1">— HUMAN BODY (BACK) —</div>
+            <div id="dummy-back" class="w-full flex flex-col items-center space-y-2.5 hidden">
                 
-                <button onclick="selectBodyPart('목/어깨 후면', ['목디스크 충격 (저림/통증)', '목 근육 경련 (담걸림)'])" class="w-24 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-full text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
-                    <i class="fa-solid fa-user text-red-400 text-xs mb-0.5"></i>
-                    <span>목 / 어깨 후면</span>
+                <button onclick="selectBodyPart('목/어깨 후면', ['목디스크 충격 (저림/통증)', '목 근육 경련 (담걸림)'])" class="w-16 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-full text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-user text-red-400 text-xs"></i>
+                    <span class="text-[10px]">목/어깨</span>
                 </button>
                 
-                <button onclick="selectBodyPart('허리/척추', ['등 근육 통증', '척추 충격 (움직임 제한)'])" class="w-40 h-20 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-2xl text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                <button onclick="selectBodyPart('허리/척추', ['등 근육 통증', '척추 충격 (움직임 제한)'])" class="w-32 h-24 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-2xl text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
                     <span>등 / 척추</span>
                 </button>
 
-                <button onclick="selectBodyPart('허리/척추', ['허리 염좌 (극심한 통증)', '급성 요통'])" class="w-36 h-12 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center">
+                <button onclick="selectBodyPart('허리/척추', ['허리 염좌 (극심한 통증)', '급성 요통'])" class="w-32 h-10 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center">
                     <span>허리 부위</span>
                 </button>
 
-                <button onclick="selectBodyPart('햄스트링/종아리', ['햄스트링 파열 (뒤쪽 허벅지 찌릿)', '종아리 근육 파열 (쥐 벼림/파열)'])" class="w-44 h-24 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-2xl text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                <button onclick="selectBodyPart('햄스트링/종아리', ['햄스트링 파열 (뒤쪽 허벅지 찌릿)', '종아리 근육 파열 (쥐 벼림/파열)'])" class="w-32 h-28 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-2xl text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
                     <i class="fa-solid fa-bolt text-red-400 text-sm mb-1"></i>
-                    <span>햄스트링 / 종아리 (후면)</span>
+                    <span>햄스트링 / 종아리</span>
                 </button>
             </div>
 
