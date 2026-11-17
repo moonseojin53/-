@@ -13,7 +13,7 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between">
 
     <!-- 상단 헤더 -->
-    <header class="bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-50 flex justify-between items-center">
+    <header class="bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-50 flex justify-between items-center shadow-lg">
         <div class="flex items-center space-x-2">
             <div class="bg-red-600 p-2 rounded-lg text-white">
                 <i class="fa-solid fa-heart-pulse text-lg"></i>
@@ -30,102 +30,120 @@
     </header>
 
     <!-- 메인 콘텐츠 -->
-    <main class="p-4 max-w-md mx-auto w-full flex-grow flex flex-col justify-center">
+    <main class="p-4 max-w-md mx-auto w-full flex-grow flex flex-col items-center justify-center">
         
         <!-- 안내 문구 -->
-        <div class="text-center mb-6">
-            <h2 class="text-xl font-extrabold mb-1">부상 부위를 터치해주세요</h2>
-            <p class="text-sm text-slate-400">통증이 있거나 다친 신체 부위를 선택하세요</p>
+        <div class="text-center mb-4">
+            <p class="text-xs bg-red-500/10 border border-red-500/30 text-red-400 py-1.5 px-3 rounded-full inline-block font-bold">
+                🚨 다친 신체 부위를 터치하세요
+            </p>
         </div>
 
         <!-- 앞/뒤 전환 탭 -->
-        <div class="flex bg-slate-900 p-1 rounded-xl mb-6 border border-slate-800">
-            <button onclick="switchView('front')" id="btn-front" class="flex-1 py-2 text-sm font-bold rounded-lg bg-red-600 text-white transition-all">신체 앞면</button>
-            <button onclick="switchView('back')" id="btn-back" class="flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 transition-all">신체 뒷면</button>
+        <div class="flex bg-slate-900 p-1 rounded-xl mb-5 border border-slate-800 w-full max-w-xs shadow-inner">
+            <button onclick="switchView('front')" id="btn-front" class="flex-1 py-2 text-xs font-bold rounded-lg bg-red-600 text-white transition-all shadow-md">앞면 (Front)</button>
+            <button onclick="switchView('back')" id="btn-back" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 transition-all">뒷면 (Back)</button>
         </div>
 
-        <!-- 인체 더미 인터페이스 영역 (앞면) -->
-        <div id="dummy-front" class="grid grid-cols-1 gap-3">
-            <button onclick="selectBodyPart('머리/얼굴', ['뇌진탕 (어지러움/두통)', '안면 출혈 및 찰과상', '치아 파손'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-head-side-mask text-red-500 text-xl w-6 text-center"></i>
-                    <span class="font-bold">머리 / 얼굴</span>
-                </div>
-                <i class="fa-solid fa-chevron-right text-slate-600"></i>
-            </button>
-            <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '가슴 타박상 (호흡 곤란)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-user-shield text-red-500 text-xl w-6 text-center"></i>
-                    <span class="font-bold">어깨 / 가슴 / 팔</span>
-                </div>
-                <i class="fa-solid fa-chevron-right text-slate-600"></i>
-            </button>
-            <button onclick="selectBodyPart('무릎', ['무릎 인대 파손 (십자인대/측부)', '반월상 연골 손상', '단순 타박상 및 부종'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-person-walking text-red-500 text-xl w-6 text-center"></i>
-                    <span class="font-bold">무릎</span>
-                </div>
-                <i class="fa-solid fa-chevron-right text-slate-600"></i>
-            </button>
-            <button onclick="selectBodyPart('발목/발', ['발목 염좌 (삐끗함)', '아킬레스건 파손 의심', '발가락 골절'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-shoe-prints text-red-500 text-xl w-6 text-center"></i>
-                    <span class="font-bold">발목 / 발</span>
-                </div>
-                <i class="fa-solid fa-chevron-right text-slate-600"></i>
-            </button>
-        </div>
+        <!-- 인체 더미 컨테이너 (사람 형상 배치) -->
+        <div class="relative bg-slate-900/90 border border-slate-800 rounded-3xl p-5 w-full max-w-xs flex flex-col items-center justify-center shadow-2xl space-y-2.5">
+            
+            <!-- 앞면 -->
+            <div id="dummy-front" class="w-full flex flex-col items-center space-y-2.5">
+                <div class="text-[10px] tracking-widest text-slate-500 font-semibold mb-1">— HUMAN BODY (FRONT) —</div>
+                
+                <button onclick="selectBodyPart('머리/얼굴', ['뇌진탕 (어지러움/두통)', '안면 출혈 및 찰과상', '치아 파손'])" class="w-20 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-full text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-head-side-mask text-red-400 group-hover:text-white text-xs mb-0.5"></i>
+                    <span>머리/얼굴</span>
+                </button>
+                
+                <div class="w-8 h-3 bg-slate-800/80 rounded-sm border border-slate-700"></div>
 
-        <!-- 인체 더미 인터페이스 영역 (뒷면) -->
-        <div id="dummy-back" class="grid grid-cols-1 gap-3 hidden">
-            <button onclick="selectBodyPart('목/어깨 후면', ['목디스크 충격 (저림/통증)', '목 근육 경련 (담걸림)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-user text-red-500 text-xl w-6 text-center"></i>
-                    <span class="font-bold">목 / 어깨 후면</span>
+                <div class="flex items-center space-x-1 w-full justify-center">
+                    <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '상완 부상'])" class="w-14 h-24 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-[11px] font-bold transition-all shadow flex flex-col items-center justify-center">
+                        <span class="text-[10px] text-slate-400">왼팔</span>
+                    </button>
+                    <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '가슴 타박상 (호흡 곤란)'])" class="w-32 h-24 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-2xl text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-user-shield text-red-400 text-sm mb-1"></i>
+                        <span>어깨 / 가슴</span>
+                    </button>
+                    <button onclick="selectBodyPart('어깨/가슴/팔', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '상완 부상'])" class="w-14 h-24 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-[11px] font-bold transition-all shadow flex flex-col items-center justify-center">
+                        <span class="text-[10px] text-slate-400">오른팔</span>
+                    </button>
                 </div>
-                <i class="fa-solid fa-chevron-right text-slate-600"></i>
-            </button>
-            <button onclick="selectBodyPart('허리/척추', ['허리 염좌 (극심한 통증)', '척추 충격 (움직임 제한)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-child-reaching text-red-500 text-xl w-6 text-center"></i>
-                    <span class="font-bold">허리 / 척추</span>
+
+                <button onclick="selectBodyPart('복부/갈비뼈', ['갈비뼈 골절 의심', '복부 타박상'])" class="w-36 h-12 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center space-x-1">
+                    <i class="fa-solid fa-child text-red-400 text-xs"></i>
+                    <span>복부 / 갈비뼈</span>
+                </button>
+                
+                <div class="flex space-x-6 w-full justify-center pt-1">
+                    <button onclick="selectBodyPart('무릎', ['무릎 인대 파손 (십자인대/측부)', '반월상 연골 손상', '단순 타박상 및 부종'])" class="w-20 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center">
+                        좌측무릎
+                    </button>
+                    <button onclick="selectBodyPart('무릎', ['무릎 인대 파손 (십자인대/측부)', '반월상 연골 손상', '단순 타박상 및 부종'])" class="w-20 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center">
+                        우측무릎
+                    </button>
                 </div>
-                <i class="fa-solid fa-chevron-right text-slate-600"></i>
-            </button>
-            <button onclick="selectBodyPart('햄스트링/종아리', ['햄스트링 파열 (뒤쪽 허벅지 찌릿)', '종아리 근육 파열 (알 배김/파열)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-bolt text-red-500 text-xl w-6 text-center"></i>
-                    <span class="font-bold">햄스트링 / 종아리 (후면)</span>
+
+                <div class="flex space-x-6 w-full justify-center pb-1">
+                    <button onclick="selectBodyPart('발목/발', ['발목 염좌 (삐끗함)', '아킬레스건 파손 의심', '발가락 골절'])" class="w-20 h-11 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-lg text-xs font-bold transition-all shadow flex items-center justify-center">
+                        왼발목
+                    </button>
+                    <button onclick="selectBodyPart('발목/발', ['발목 염좌 (삐끗함)', '아킬레스건 파손 의심', '발가락 골절'])" class="w-20 h-11 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-lg text-xs font-bold transition-all shadow flex items-center justify-center">
+                        오른발목
+                    </button>
                 </div>
-                <i class="fa-solid fa-chevron-right text-slate-600"></i>
-            </button>
+            </div>
+
+            <!-- 뒷면 -->
+            <div id="dummy-back" class="w-full flex flex-col items-center space-y-3 hidden">
+                <div class="text-[10px] tracking-widest text-slate-500 font-semibold mb-1">— HUMAN BODY (BACK) —</div>
+                
+                <button onclick="selectBodyPart('목/어깨 후면', ['목디스크 충격 (저림/통증)', '목 근육 경련 (담걸림)'])" class="w-24 h-14 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-full text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-user text-red-400 text-xs mb-0.5"></i>
+                    <span>목 / 어깨 후면</span>
+                </button>
+                
+                <button onclick="selectBodyPart('허리/척추', ['등 근육 통증', '척추 충격 (움직임 제한)'])" class="w-40 h-20 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-2xl text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                    <span>등 / 척추</span>
+                </button>
+
+                <button onclick="selectBodyPart('허리/척추', ['허리 염좌 (극심한 통증)', '급성 요통'])" class="w-36 h-12 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all shadow flex items-center justify-center">
+                    <span>허리 부위</span>
+                </button>
+
+                <button onclick="selectBodyPart('햄스트링/종아리', ['햄스트링 파열 (뒤쪽 허벅지 찌릿)', '종아리 근육 파열 (쥐 벼림/파열)'])" class="w-44 h-24 bg-slate-800 hover:bg-red-600 hover:text-white border border-slate-700 rounded-2xl text-xs font-bold transition-all shadow flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-bolt text-red-400 text-sm mb-1"></i>
+                    <span>햄스트링 / 종아리 (후면)</span>
+                </button>
+            </div>
+
         </div>
 
     </main>
 
     <!-- 푸터 -->
     <footer class="p-4 text-center text-xs text-slate-500 border-t border-slate-900">
-        <p>⚠️ 본 가이드는 응급 시 임시 조치용이며, 전문 의료진의 진단을 대체할 수 없습니다.</p>
+        <p>⚽ 플랩 및 동호회 현장 맞춤 응급처치 가이드</p>
     </footer>
 
     <!-- 증상 선택 모달 -->
     <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto shadow-2xl">
             <div class="flex justify-between items-center mb-4">
                 <h3 id="modal-title" class="text-lg font-bold text-white">부상 증상 선택</h3>
                 <button onclick="closeModal()" class="text-slate-400 hover:text-white p-2">
                     <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
-            <div id="modal-content" class="space-y-3">
-                <!-- 동적 생성 -->
-            </div>
+            <div id="modal-content" class="space-y-3"></div>
         </div>
     </div>
 
     <!-- 가이드 상세 모달 -->
     <div id="guide-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto shadow-2xl">
             <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
                 <div>
                     <span class="text-xs text-red-500 font-bold uppercase tracking-wider">Emergency Guide</span>
@@ -136,9 +154,7 @@
                 </button>
             </div>
             
-            <div id="guide-body" class="space-y-4 text-sm text-slate-300">
-                <!-- 가이드 내용 -->
-            </div>
+            <div id="guide-body" class="space-y-4 text-sm text-slate-300"></div>
 
             <div class="mt-6 pt-4 border-t border-slate-800">
                 <button onclick="closeGuideModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl font-bold transition-all">
@@ -156,13 +172,13 @@
             const dummyBack = document.getElementById('dummy-back');
 
             if (type === 'front') {
-                btnFront.className = "flex-1 py-2 text-sm font-bold rounded-lg bg-red-600 text-white transition-all";
-                btnBack.className = "flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 transition-all";
+                btnFront.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-red-600 text-white transition-all shadow-md";
+                btnBack.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 transition-all";
                 dummyFront.classList.remove('hidden');
                 dummyBack.classList.add('hidden');
             } else {
-                btnBack.className = "flex-1 py-2 text-sm font-bold rounded-lg bg-red-600 text-white transition-all";
-                btnFront.className = "flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 transition-all";
+                btnBack.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-red-600 text-white transition-all shadow-md";
+                btnFront.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 transition-all";
                 dummyBack.classList.remove('hidden');
                 dummyFront.classList.add('hidden');
             }
