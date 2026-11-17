@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스포츠 응급 처치 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- 상단 헤더 -->
+    <header class="bg-slate-900 border-b border-slate-800 p-4 sticky top-0 z-50 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <div class="bg-red-600 p-2 rounded-lg text-white">
+                <i class="fa-solid fa-heart-pulse text-lg"></i>
+            </div>
+           <div>
+                <h1 class="font-bold text-lg leading-tight">응급 가이드</h1>
+                <p class="text-xs text-slate-400">플랩 / 동호회 현장 응급처치</p>
+            </div>
+        </div>
+        <a href="tel:119" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl text-sm font-bold flex items-center space-x-1 shadow-lg shadow-red-900/40 animate-pulse">
+            <i class="fa-solid fa-phone"></i>
+            <span>119 신고</span>
+        </a>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="p-4 max-w-md mx-auto w-full flex-grow flex flex-col justify-center">
+        
+        <!-- 안내 문구 -->
+        <div class="text-center mb-6">
+            <h2 class="text-xl font-extrabold mb-1">부상 부위를 터치해주세요</h2>
+            <p class="text-sm text-slate-400">통증이 있거나 다친 신체 부위를 선택하세요</p>
+        </div>
+
+        <!-- 앞/뒤 전환 탭 -->
+        <div class="flex bg-slate-900 p-1 rounded-xl mb-6 border border-slate-800">
+            <button onclick="switchView('front')" id="btn-front" class="flex-1 py-2 text-sm font-bold rounded-lg bg-red-600 text-white transition-all">신체 앞면</button>
+            <button onclick="switchView('back')" id="btn-back" class="flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 transition-all">신체 뒷면</button>
+        </div>
+
+        <!-- 인체 더미 인터페이스 영역 -->
+        <div id="dummy-front" class="grid grid-cols-1 gap-3">
+            <button onclick="selectBodyPart('머리/안面', ['뇌진탕 (어지러움/두통)', '안면 출혈 및 찰과상', '치아 파손'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-head-side-mask text-red-500 text-xl w-6 text-center"></i>
+                    <span class="font-bold">머리 / 얼굴</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-600"></i>
+            </button>
+            <button onclick="selectBodyPart('상체 (어깨/가슴)', ['어깨 탈구 (빠짐)', '쇄골 골절 의심', '가슴 타박상 (호흡 곤란)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-user-shield text-red-500 text-xl w-6 text-center"></i>
+                    <span class="font-bold">어깨 / 가슴 / 팔</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-600"></i>
+            </button>
+            <button onclick="selectBodyPart('무릎', ['무릎 인대 파손 (십자인대/측부)', '반월상 연골 손상', '단순 타박상 및 부종'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-person-walking text-red-500 text-xl w-6 text-center"></i>
+                    <span class="font-bold">무릎</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-600"></i>
+            </button>
+            <button onclick="selectBodyPart('발목/발', ['발목 염좌 (삐끗함)', '아킬레스건 파손 의심', '발가락 골절'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-shoe-prints text-red-500 text-xl w-6 text-center"></i>
+                    <span class="font-bold">발목 / 발</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-600"></i>
+            </button>
+        </div>
+
+        <div id="dummy-back" class="grid grid-cols-1 gap-3 hidden">
+            <button onclick="selectBodyPart('목/어깨 뒷부분', ['목디스크 충격 (저림/통증)', '목 근육 경련 (담걸림)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-user text-red-500 text-xl w-6 text-center"></i>
+                    <span class="font-bold">목 / 어깨 후면</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-600"></i>
+            </button>
+            <button onclick="selectBodyPart('허리/척추', ['허리 염좌 (극심한 통증)', '척추 충격 (움직임 제한)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-child-reaching text-red-500 text-xl w-6 text-center"></i>
+                    <span class="font-bold">허리 / 척추</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-600"></i>
+            </button>
+            <button onclick="selectBodyPart('종아리/햄스트링', ['햄스트링 파열 (뒤쪽 허벅지 찌릿)', '종아리 근육 파열 (알 배김/파열)'])" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl flex items-center justify-between transition-all">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-bolt text-red-500 text-xl w-6 text-center"></i>
+                    <span class="font-bold">햄스트링 / 종아리 (후면)</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-slate-600"></i>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="p-4 text-center text-xs text-slate-500 border-t border-slate-900">
+        <p>⚠️ 본 가이드는 응급 시 임시 조치용이며, 전문 의료진의 진단을 대체할 수 없습니다.</p>
+    </footer>
+
+    <!-- 증상 선택 모달 -->
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto animate-in fade-in slide-in-from-bottom duration-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-lg font-bold text-white">부상 증상 선택</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="space-y-3">
+                <!-- 동적 생성 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 가이드 상세 모달 -->
+    <div id="guide-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-t-2xl sm:rounded-2xl p-6 max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <div>
+                    <span class="text-xs text-red-500 font-bold uppercase tracking-wider">Emergency Guide</span>
+                    <h3 id="guide-title" class="text-lg font-bold text-white">응급 처치 가이드</h3>
+                </div>
+                <button onclick="closeGuideModal()" class="text-slate-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="guide-body" class="space-y-4 text-sm text-slate-300">
+                <!-- 가이드 내용 -->
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-800">
+                <button onclick="closeGuideModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl font-bold transition-all">
+                    확인 완료 (닫기)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchView(type) {
+            const btnFront = document.getElementById('btn-front');
+            const btnBack = document.getElementById('btn-back');
+            const dummyFront = document.getElementById('dummy-front');
+            const dummyBack = document.getElementById('dummy-back');
+
+            if (type === 'front') {
+                btnFront.className = "flex-1 py-2 text-sm font-bold rounded-lg bg-red-600 text-white transition-all";
+                btnBack.className = "flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 transition-all";
+                dummyFront.classList.remove('hidden');
+                dummyBack.classList.add('hidden');
+            } else {
+                btnBack.className = "flex-1 py-2 text-sm font-bold rounded-lg bg-red-600 text-white transition-all";
+                btnFront.className = "flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 transition-all";
+                dummyBack.classList.remove('hidden');
+                dummyFront.classList.add('hidden');
+            }
+        }
+
+        function selectBodyPart(partName, symptoms) {
+            document.getElementById('modal-title').innerText = `${partName} - 증상 선택`;
+            const content = document.getElementById('modal-content');
+            content.innerHTML = '';
+
+            symptoms.forEach(symptom => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-slate-800 hover:bg-slate-700 border border-slate-700 p-4 rounded-xl font-medium transition-all flex items-center justify-between";
+                btn.innerHTML = `<span>${symptom}</span><i class="fa-solid fa-arrow-right text-xs text-slate-400"></i>`;
+                btn.onclick = () => showGuide(symptom);
+                content.appendChild(btn);
+            });
+
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        function showGuide(symptomName) {
+            closeModal();
+            document.getElementById('guide-title').innerText = symptomName;
+            const body = document.getElementById('guide-body');
+
+            body.innerHTML = `
+                <div class="bg-red-500/10 border border-red-500/30 p-3 rounded-xl text-red-400 text-xs font-bold mb-3">
+                    🚨 즉시 무리한 움직임을 멈추고 안정을 취하세요!
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-slate-800/60 p-3 rounded-xl">
+                        <span class="text-red-400 font-bold block mb-1">1. 안정 (Rest)</span>
+                        <p class="text-xs text-slate-300">부상 부위를 절대 움직이지 말고 편안한 자세로 고정합니다.</p>
+                    </div>
+                    <div class="bg-slate-800/60 p-3 rounded-xl">
+                        <span class="text-red-400 font-bold block mb-1">2. 냉찜질 (Ice)</span>
+                        <p class="text-xs text-slate-300">얼음주머니를 수건에 감싸 부상 부위에 15~20분간 대어 부종과 통증을 줄입니다.</p>
+                    </div>
+                    <div class="bg-slate-800/60 p-3 rounded-xl">
+                        <span class="text-red-400 font-bold block mb-1">3. 압박 & 거올 (Compression & Elevation)</span>
+                        <p class="text-xs text-slate-300">탄력 붕대로 가볍게 압박하고, 부상 부위를 심장보다 높게 유지합니다.</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('guide-modal').classList.remove('hidden');
+        }
+
+        function closeGuideModal() {
+            document.getElementById('guide-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
